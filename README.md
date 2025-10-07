@@ -1,36 +1,103 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Innovation Brindes — Teste Técnico Front-end
 
-## Getting Started
+Desafio técnico desenvolvido para o processo seletivo da **Innovation Brindes**.  
+O projeto implementa uma mini-aplicação com `/login` e `/produtos`, fiel ao layout fornecido, utilizando **Next.js (App Router)** e consumo dos endpoints de autenticação e listagem da API homolog.
 
-First, run the development server:
+---
+
+## 🚀 Demonstração
+
+### 🔗 Repositório público
+👉 [https://github.com/lubamathias/innovation-desafio](https://github.com/lubamathias/innovation-desafio)
+
+### 🧭 Fluxo da aplicação
+![Fluxo Demo](assets/demo.gif)
+
+### 📊 Lighthouse (Desktop)
+![Lighthouse Desktop](assets/lighthouse-desktop.png)
+
+---
+
+## ⚙️ Tecnologias utilizadas
+
+- **Next.js (App Router)** – framework React moderno para SSR e SSG  
+- **TypeScript** – tipagem estática e segurança de código  
+- **Tailwind CSS** – estilização rápida, responsiva e consistente  
+- **Zustand** – controle de estado global (auth + favoritos)  
+- **fetch API** – com interceptador para anexar o token `Authorization: Bearer`  
+- **Debounce + Busca com POST** – para filtrar produtos por nome/código  
+- **Modal acessível** – com foco, overlay e fechamento por Esc  
+- **LocalStorage** – persistência dos favoritos  
+- **Responsividade mobile-first** – layout adaptado a diferentes tamanhos de tela  
+- **SEO básico** – `<title>` e `<meta name="description">` em `/login` e `/produtos`
+
+---
+
+## 🧩 Funcionalidades
+
+### 🔐 Autenticação
+- Tela `/login` com:
+  - Campos de e-mail e senha  
+  - Botões “Manter logado” e “Esqueceu a senha?” (não funcional)
+  - Validação de erro com mensagem amigável  
+  - Redirecionamento automático para `/produtos` após login bem-sucedido  
+  - Guarda de rotas: bloqueia acesso sem token (redirect automático para `/login`)  
+
+### 🛍️ Listagem de produtos
+- Consumo do endpoint GET `/produtos/listar` (com token)
+- Grid responsivo com:
+  - Imagem do produto  
+  - Nome e código  
+  - Preço formatado em BRL  
+  - Selo **“EXCLUSIVO!”**  
+  - Botão **“CONFIRA”**
+- Busca com debounce (300–500 ms) via POST `/produtos/listar`
+- Estado “sem resultados” quando a busca não retorna itens
+- Ordenação local por **preço (asc/desc)** e **nome (A→Z / Z→A)**
+- Paginação incremental / infinite scroll
+
+### ⭐ Favoritos
+- Cada produto pode ser favoritado
+- Persistência em `localStorage`
+- Filtro “Mostrar apenas favoritos”
+
+### 🧱 Modal de detalhes
+- Abertura ao clicar em “CONFIRA”
+- Exibe informações completas do item
+- Fechamento por botão ou tecla `Esc`
+- Acessível (foco preso, overlay, aria-attributes)
+
+---
+
+## 🧠 Decisões técnicas
+
+- **App Router:** escolhi o App Router por ser a abordagem moderna do Next.js, com melhor separação entre componentes server/client e suporte a metadados nativos.  
+- **Zustand:** usei Zustand por ser leve e prático, com persistência simples para token e favoritos.  
+- **Tailwind CSS:** permitiu manter o layout fiel e responsivo com rapidez.  
+- **fetch wrapper (lib/api.ts):** criado para adicionar automaticamente o token e tratar 401 (logout).  
+- **Composição de componentes:** os cards, modal, input e botões seguem padrão de componentização reutilizável.  
+
+---
+
+## 🧰 Como rodar localmente
+
+### 1️⃣ Clone o repositório
 
 ```bash
+git clone https://github.com/lubamathias/innovation-desafio.git
+cd innovation-desafio
+
+2️⃣ Instale as dependências
+npm install
+
+3️⃣ Inicie o servidor de desenvolvimento
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Acesse em http://localhost:3000/login
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+4️⃣ Login de teste
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Use as credenciais fornecidas:
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+email: dinamica
+senha: 123
