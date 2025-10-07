@@ -14,7 +14,7 @@ O projeto implementa uma mini-aplicação com `/login` e `/produtos`, fiel ao la
 ![Fluxo Demo](assets/demo.gif)
 
 ### 📊 Lighthouse (Desktop)
-![Lighthouse Desktop](assets/lighthouse-desktop.png)
+![Lighthouse Desktop](assets/lighthouse-desktop.jpeg)
 
 ---
 
